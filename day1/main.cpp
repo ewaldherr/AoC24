@@ -33,10 +33,9 @@ void readFileToVectors(const std::string& filename, std::vector<int>& left, std:
 
 int getDiff(std::vector<int>& left, std::vector<int>& right){
     int sum = 0;
-    std::make_heap(left.begin(), left.end());
-    std::make_heap(right.begin(), right.end());
-
     for(int i = 0; i < left.size(); ++i){
+        std::make_heap(left.begin(), left.end());
+        std::make_heap(right.begin(), right.end());
         std::pop_heap(left.begin(), left.end());
         std::pop_heap(right.begin(), right.end());
         sum += std::abs(left.back() - right.back() );
