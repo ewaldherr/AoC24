@@ -9,7 +9,7 @@
 #include <sstream>
 #include <string>
 
-void readFileToVectors(const std::string& filename, std::vector<std::string>& left, std::vector<std::string>& right) {
+void readFileToVectors(const std::string& filename, std::vector<int>& left, std::vector<int>& right) {
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error opening file: " << filename << std::endl;
@@ -19,7 +19,7 @@ void readFileToVectors(const std::string& filename, std::vector<std::string>& le
     std::string line;
     while (std::getline(file, line)) {
         std::istringstream iss(line);
-        std::string leftEntry, rightEntry;
+        int leftEntry, rightEntry;
         if (iss >> leftEntry >> rightEntry) {
             left.push_back(leftEntry);
             right.push_back(rightEntry);
@@ -31,15 +31,15 @@ void readFileToVectors(const std::string& filename, std::vector<std::string>& le
     file.close();
 }
 
-int getDiff(std::vector<std::string>& left, std::vector<std::string>& right){
+int getDiff(std::vector<int>& left, std::vector<int>& right){
     int sum = 0;
     std::make_heap(left.begin(), left.end());
     std::make_heap(right.begin(), right.end());
 
     for(int i = 0; i < left.size(); ++i){
-        std::pop_heap(left.begin(), left.end();
+        std::pop_heap(left.begin(), left.end());
         std::pop_heap(right.begin(), right.end());
-        sum += std::abs(left.pop_back()) - right.pop_back());
+        sum += std::abs(left.pop_back() - right.pop_back());
     }
 
     return sum;
