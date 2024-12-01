@@ -37,7 +37,9 @@ int getDiff(std::vector<std::string>& left, std::vector<std::string>& right){
     std::make_heap(right.begin(), right.end());
 
     for(int i = 0; i < left.size(); ++i){
-        sum += std::abs(std::pop_heap(left.begin(), left.end()) - std::pop_heap(right.begin(), right.end()));
+        std::pop_heap(left.begin(), left.end();
+        std::pop_heap(right.begin(), right.end());
+        sum += std::abs(left.pop_back()) - right.pop_back());
     }
 
     return sum;
