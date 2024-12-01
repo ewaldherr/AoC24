@@ -5,6 +5,9 @@
 #include <vector>
 #include <cmath>
 #include <cstdlib>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 void readFileToVectors(const std::string& filename, std::vector<std::string>& left, std::vector<std::string>& right) {
     std::ifstream file(filename);
@@ -30,9 +33,13 @@ void readFileToVectors(const std::string& filename, std::vector<std::string>& le
 
 int getDiff(std::vector<std::string>& left, std::vector<std::string>& right){
     int sum = 0;
+    std::make_heap(left.begin(), left.end());
+    std::make_heap(right.begin(), right.end());
+
     for(int i = 0; i < left.size(); ++i){
-        
+        sum += std::abs(std::pop_heap(left.begin(), left.end()) - std::pop_heap(right.begin(), right.end()));
     }
+
     return sum;
 }
 
@@ -40,7 +47,5 @@ int main(int argc, char** argv){
     std::vector<int> left;
     std::vector<int> right;
     readFileToVectors(argc[1], left, right);
-    std::make_heap(left.begin(), left.end());
-    std::make_heap(right.begin(), right.end());
     std::cout << "The result is" << getDiff(left, right) << std::endl;
 }
