@@ -39,7 +39,9 @@ int getDiff(std::vector<int>& left, std::vector<int>& right){
     for(int i = 0; i < left.size(); ++i){
         std::pop_heap(left.begin(), left.end());
         std::pop_heap(right.begin(), right.end());
-        sum += std::abs(left.pop_back() - right.pop_back());
+        sum += std::abs(left.back() - right.back() );
+        left.pop_back();
+        right.pop_back();
     }
 
     return sum;
@@ -48,6 +50,6 @@ int getDiff(std::vector<int>& left, std::vector<int>& right){
 int main(int argc, char** argv){
     std::vector<int> left;
     std::vector<int> right;
-    readFileToVectors(argc[1], left, right);
+    readFileToVectors(argv[1], left, right);
     std::cout << "The result is" << getDiff(left, right) << std::endl;
 }
