@@ -33,8 +33,8 @@ int checkDecreasingLine(std::vector<int>& vec, int errors){
                 return 0;
             } else{
                 std::vector<int> copy = vec;
-                copy.erase(copy.first()+i);
-                vec.erase(vec.first()+i+1);
+                copy.erase(copy.begin()+i);
+                vec.erase(vec.begin()+i+1);
                 int cascade = checkDecreasingLine(vec,1) + checkDecreasingLine(copy,1);
                 if(cascade > 0){
                     return 1;
@@ -55,8 +55,8 @@ int checkIncreasingLine(std::vector<int>& vec, int errors){
                 return 0;
             } else{
                 std::vector<int> copy = vec;
-                copy.erase(copy.first()+i);
-                vec.erase(vec.first()+i+1);
+                copy.erase(copy.begin()+i);
+                vec.erase(vec.begin()+i+1);
                 int cascade = checkDecreasingLine(vec,1) + checkDecreasingLine(copy,1);
                 if(cascade > 0){
                     return 1;
