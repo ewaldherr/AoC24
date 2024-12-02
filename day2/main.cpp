@@ -30,7 +30,7 @@ int checkDecreasingLine(std::vector<int>& vec, int errors){
         int diff = vec[i] - vec[i+1];
         if(diff > 3 || diff < 1){
             errors++;
-            if(errors==1){
+            if(errors==2){
                 return 0;
             } else{
                 std::vector<int> copy = vec;
