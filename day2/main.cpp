@@ -54,6 +54,7 @@ int GetValidLines(std::vector<std::vector<int>>& grid){
             sum += checkDecreasingLine(vec);
         }
     }
+    return sum;
 }
 
 int main(int argc, char** argv){
