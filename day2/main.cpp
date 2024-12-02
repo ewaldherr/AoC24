@@ -59,5 +59,5 @@ int GetValidLines(std::vector<std::vector<int>>& grid){
 int main(int argc, char** argv){
     std::vector<std::vector<int>> grid;
     readGridToVector(argv[1], grid);
-    std::cout << "The result is" << getSimilarityScore(left, right) << std::endl;
+    std::cout << "The result is" << GetValidLines(grid) << std::endl;
 }
