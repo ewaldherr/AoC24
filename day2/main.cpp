@@ -30,7 +30,7 @@ int checkDecreasingLine(std::vector<int>& vec, int errors){
         int diff = vec[i] - vec[i+1];
         if(diff > 3 || diff < 1){
             errors++;
-            if(errors==2){
+            if(errors > 1){
                 return 0;
             } else{
                 std::vector<int> copy = vec;
@@ -53,13 +53,13 @@ int checkIncreasingLine(std::vector<int>& vec, int errors){
         int diff = vec[i+1] - vec[i];
         if(diff > 3 || diff < 1){
             errors++;
-            if(errors==2){
+            if(errors > 1){
                 return 0;
             } else{
                 std::vector<int> copy = vec;
                 copy.erase(copy.begin()+i);
                 vec.erase(vec.begin()+i+1);
-                int cascade = checkDecreasingLine(vec,1) + checkDecreasingLine(copy,1);
+                int cascade = checkIncreasingLine(vec,1) + checkIncreasingLine(copy,1);
                 if(cascade > 0){
                     return 1;
                 } else{
