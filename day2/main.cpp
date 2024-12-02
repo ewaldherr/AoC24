@@ -74,8 +74,9 @@ int checkIncreasingLine(std::vector<int>& vec, int errors){
 int GetValidLines(std::vector<std::vector<int>>& grid){
     int sum = 0;
     for(auto vec: grid){
+        std::vector<int> copy = vec;
         sum += checkIncreasingLine(vec, 0);
-        sum += checkDecreasingLine(vec, 0);
+        sum += checkDecreasingLine(copy, 0);
     }
     return sum;
 }
