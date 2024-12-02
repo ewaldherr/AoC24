@@ -26,20 +26,28 @@ void readGridToVector(const std::string& filename, std::vector<std::vector<int>>
 }
 
 int checkDecreasingLine(std::vector<int>& vec){
+    int errors = 0;
     for(int i = 0; i + 1 < vec.size(); ++i){
         int diff = vec[i] - vec[i+1];
         if(diff > 3 || diff < 1){
-            return 0;
+            errors++;
+            if(errors==2){
+                return 0;
+            }
         }
     }
     return 1;
 }
 
 int checkIncreasingLine(std::vector<int>& vec){
+    int errors = 0;
     for(int i = 0; i + 1 < vec.size(); ++i){
         int diff = vec[i+1] - vec[i];
         if(diff > 3 || diff < 1){
-            return 0;
+            errors++;
+            if(errors==2){
+                return 0;
+            }
         }
     }
     return 1;
@@ -48,11 +56,8 @@ int checkIncreasingLine(std::vector<int>& vec){
 int GetValidLines(std::vector<std::vector<int>>& grid){
     int sum = 0;
     for(auto vec: grid){
-        if(vec[0] < vec[1]){
-            sum += checkIncreasingLine(vec);
-        } else{
-            sum += checkDecreasingLine(vec);
-        }
+        sum += checkIncreasingLine(vec);
+        sum += checkDecreasingLine(vec);
     }
     return sum;
 }
@@ -60,5 +65,5 @@ int GetValidLines(std::vector<std::vector<int>>& grid){
 int main(int argc, char** argv){
     std::vector<std::vector<int>> grid;
     readGridToVector(argv[1], grid);
-    std::cout << "The result is" << GetValidLines(grid) << std::endl;
+    std::cout << "The result is " << GetValidLines(grid) << std::endl;
 }

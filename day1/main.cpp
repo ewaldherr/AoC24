@@ -70,5 +70,5 @@ int main(int argc, char** argv){
     std::vector<int> left;
     std::vector<int> right;
     readFileToVectors(argv[1], left, right);
-    std::cout << "The result is" << getSimilarityScore(left, right) << std::endl;
+    std::cout << "The result is " << getSimilarityScore(left, right) << std::endl;
 }
