@@ -29,6 +29,7 @@ int checkDecreasingLine(std::vector<int>& vec, int errors){
     for(int i = 0; i + 1 < vec.size(); ++i){
         int diff = vec[i] - vec[i+1];
         if(diff > 3 || diff < 1){
+            errors++;
             if(errors==1){
                 return 0;
             } else{
@@ -51,6 +52,7 @@ int checkIncreasingLine(std::vector<int>& vec, int errors){
     for(int i = 0; i + 1 < vec.size(); ++i){
         int diff = vec[i+1] - vec[i];
         if(diff > 3 || diff < 1){
+            errors++;
             if(errors==2){
                 return 0;
             } else{
