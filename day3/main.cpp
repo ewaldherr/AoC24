@@ -24,6 +24,15 @@ void readGridToVector(const std::string& filename, std::vector<std::vector<char>
     file.close();
 }
 
+void checkEnableStatus(bool& ref, std::vector<char>& vec, int pos){
+    if(vec[pos] == '(' && vec[pos+1] == ')'){
+        ref = true;
+    }
+    if(vec[pos] == 'n' && vec[pos+1] == '\'' && vec[pos+2] == 't' && vec[pos] == '(' && vec[pos] == ')'){
+        ref = false;
+    }
+}
+
 bool isDigit(char c){
     int i = c - '0';
     return (i > -1 && i < 10);
@@ -147,11 +156,14 @@ int64_t checkPosition(std::vector<char> & vec, int pos){
     return 0;
 }
 
-int64_t calcLine(std::vector<char> & vec){
+int64_t calcLine(std::vector<char> & vec, bool& ref){
     int64_t sum = 0;
     for(int i = 0; i < vec.size();++i){
-        if(vec[i] == 'm'){
+        if(vec[i] == 'm' && ref){
             sum += checkPosition(vec, i + 1);
+        }
+        if(vec[i] == 'd' && vec[i+1] == 'o'){
+            checkEnableStatus(ref, vec, i + 2);
         }
     }
     return sum;
@@ -161,8 +173,10 @@ int main(int argc, char** argv){
     std::vector<std::vector<char>> grid;
     readGridToVector(argv[1], grid);
     int64_t sum = 0;
+    bool enabled = true;
+    bool& ref = enabled;
     for(auto vec: grid){
-        sum += calcLine(vec);
+        sum += calcLine(vec,ref);
     }
     std::cout << "The result is " << sum << std::endl;
 }
