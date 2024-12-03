@@ -144,8 +144,8 @@ int checkPosition(std::vector<char> & vec, int pos){
 
 int calcLine(std::vector<char> & vec){
     int sum = 0;
-    for(char c: vec){
-        if(c == 'm'){
+    for(i = 0; i < vec.size();++i){
+        if(vec[i] == 'm'){
             sum += checkPosition(vec, i + 1);
         }
     }
