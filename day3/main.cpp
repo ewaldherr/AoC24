@@ -30,11 +30,11 @@ bool isDigit(char c){
     return (i > -1 && i < 10);
 }
 
-int multiply(int a1, int a2, int a3, int b1, int b2, int b3){
+int64_t multiply(int a1, int a2, int a3, int b1, int b2, int b3){
     return a1*100*b1*100+a1*100*b2*10+a1*100*b3+a2*10*b1*100+a2*10*b2*10+a2*10*b3+a3*b1*100+a3*b2*10+a3*b3;
 }
 
-int checkPosition(std::vector<char> & vec, int pos){
+int64_t checkPosition(std::vector<char> & vec, int pos){
     if(vec[pos] == 'u' && vec[pos+1] == 'l' && vec[pos+2] == '('){
         int a1, a2, a3, b1, b2, b3;
         if(!isDigit(vec[pos+3])){
@@ -68,7 +68,7 @@ int checkPosition(std::vector<char> & vec, int pos){
                 //second number is 2 digits long
                 return multiply(0,0,a1,0,b1,b2);
             } else{
-                b3 = std::atoi(vec[pos+7]);
+                b3 = vec[pos+7] - '0';
             } 
             if(vec[pos+8]!= ')'){
                 return 0;
@@ -147,19 +147,20 @@ int checkPosition(std::vector<char> & vec, int pos){
     return 0;
 }
 
-int calcLine(std::vector<char> & vec){
-    int sum = 0;
-    for(i = 0; i < vec.size();++i){
+int64_t calcLine(std::vector<char> & vec){
+    int64_T sum = 0;
+    for(int i = 0; i < vec.size();++i){
         if(vec[i] == 'm'){
             sum += checkPosition(vec, i + 1);
         }
     }
+    return sum;
 }
 
 int main(int argc, char** argv){
     std::vector<std::vector<char>> grid;
     readGridToVector(argv[1], grid);
-    int sum = 0;
+    int64_t sum = 0;
     for(auto vec: grid){
         sum += calcLine(vec);
     }
