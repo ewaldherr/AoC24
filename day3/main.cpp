@@ -1,3 +1,9 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <string>
+
 void readGridToVector(const std::string& filename, std::vector<std::vector<char>>& grid) {
     std::ifstream file(filename);
     if (!file.is_open()) {
