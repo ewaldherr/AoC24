@@ -15,9 +15,8 @@ void readGridToVector(const std::string& filename, std::vector<std::vector<char>
     while (std::getline(file, line)) {
         std::istringstream iss(line);
         std::vector<char> row;
-        char value;
-        while (iss >> value) {
-            row.push_back(value);
+        for (char c : line) {
+            row.push_back(c);
         }
         grid.push_back(row);
     }
@@ -31,12 +30,13 @@ bool isDigit(char c){
 }
 
 int64_t multiply(int a1, int a2, int a3, int b1, int b2, int b3){
+    std::cout << a1*100*b1*100+a1*100*b2*10+a1*100*b3+a2*10*b1*100+a2*10*b2*10+a2*10*b3+a3*b1*100+a3*b2*10+a3*b3 << std::endl;
     return a1*100*b1*100+a1*100*b2*10+a1*100*b3+a2*10*b1*100+a2*10*b2*10+a2*10*b3+a3*b1*100+a3*b2*10+a3*b3;
 }
 
 int64_t checkPosition(std::vector<char> & vec, int pos){
     if(vec[pos] == 'u' && vec[pos+1] == 'l' && vec[pos+2] == '('){
-        int a1, a2, a3, b1, b2, b3;
+        int a1 = 0, a2 = 0, a3 = 0, b1 = 0, b2 = 0, b3 = 0;
         if(!isDigit(vec[pos+3])){
             return 0;
         } else {
@@ -59,7 +59,7 @@ int64_t checkPosition(std::vector<char> & vec, int pos){
                 //second number is 1 digit long 
                 return multiply(0,0,a1,0,0,b1);
             } else{
-                a2 = vec[pos+6] - '0';;
+                b2 = vec[pos+6] - '0';;
             }
             if(!isDigit(vec[pos+7])){
                 if(vec[pos+7] != ')'){
@@ -94,7 +94,7 @@ int64_t checkPosition(std::vector<char> & vec, int pos){
                 //second number is 1 digit long 
                 return multiply(0,a1,a2,0,0,b1);
             } else{
-                a2 = vec[pos+7] - '0';
+                b2 = vec[pos+7] - '0';
             }
             if(!isDigit(vec[pos+8])){
                 if(vec[pos+8] != ')'){
@@ -121,8 +121,8 @@ int64_t checkPosition(std::vector<char> & vec, int pos){
         } else {
             b1 = vec[pos+7] - '0';
         }
-        if(!isDigit(vec[pos+4])){
-            if(vec[pos+4] != ')'){
+        if(!isDigit(vec[pos+8])){
+            if(vec[pos+8] != ')'){
                 return 0;
             }
             //second number is 1 digit long 
@@ -130,8 +130,8 @@ int64_t checkPosition(std::vector<char> & vec, int pos){
         } else{
             b2 = vec[pos+8] - '0';
         }
-        if(!isDigit(vec[pos+5])){
-            if(vec[pos+5] != ')'){
+        if(!isDigit(vec[pos+9])){
+            if(vec[pos+9] != ')'){
                 return 0;
             }
             //second number is 2 digits long
