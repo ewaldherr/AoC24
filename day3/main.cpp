@@ -148,7 +148,7 @@ int64_t checkPosition(std::vector<char> & vec, int pos){
 }
 
 int64_t calcLine(std::vector<char> & vec){
-    int64_T sum = 0;
+    int64_t sum = 0;
     for(int i = 0; i < vec.size();++i){
         if(vec[i] == 'm'){
             sum += checkPosition(vec, i + 1);
