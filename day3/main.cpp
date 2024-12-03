@@ -28,7 +28,7 @@ void checkEnableStatus(bool& ref, std::vector<char>& vec, int pos){
     if(vec[pos] == '(' && vec[pos+1] == ')'){
         ref = true;
     }
-    if(vec[pos] == 'n' && vec[pos+1] == '\'' && vec[pos+2] == 't' && vec[pos] == '(' && vec[pos] == ')'){
+    if(vec[pos] == 'n' && vec[pos+1] == '\'' && vec[pos+2] == 't' && vec[pos+3] == '(' && vec[pos+4] == ')'){
         ref = false;
     }
 }
@@ -39,7 +39,6 @@ bool isDigit(char c){
 }
 
 int64_t multiply(int a1, int a2, int a3, int b1, int b2, int b3){
-    std::cout << a1*100*b1*100+a1*100*b2*10+a1*100*b3+a2*10*b1*100+a2*10*b2*10+a2*10*b3+a3*b1*100+a3*b2*10+a3*b3 << std::endl;
     return a1*100*b1*100+a1*100*b2*10+a1*100*b3+a2*10*b1*100+a2*10*b2*10+a2*10*b3+a3*b1*100+a3*b2*10+a3*b3;
 }
 
