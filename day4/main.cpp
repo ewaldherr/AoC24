@@ -94,5 +94,5 @@ int checkGridCross(std::vector<std::vector<char>>& grid){
 int main(int argc, char** argv){
     std::vector<std::vector<char>> grid;
     readGridToVector(argv[1], grid);
-    std::cout << "The result is " << checkGrid(grid) << std::endl;
+    std::cout << "The result is " << checkGridCross(grid) << std::endl;
 }
