@@ -25,12 +25,10 @@ void readGridToVector(const std::string& filename, std::vector<std::vector<char>
 }
 
 int checkPosition(std::vector<std::vector<char>>& grid, int i, int j, int i_incr, int j_incr){
-    if(grid[i][j] == 'X'){
-        if(grid[i+i_incr][j+j_incr] == 'M' && grid[i+2*i_incr][j+2*j_incr] == 'A' && grid[i+3*i_incr][j+3*j_incr] == 'S'){
-            return 1;
-        }
-        return 0;
+    if(grid[i+i_incr][j+j_incr] == 'M' && grid[i+2*i_incr][j+2*j_incr] == 'A' && grid[i+3*i_incr][j+3*j_incr] == 'S'){
+        return 1;
     }
+    return 0;
 }
 
 int checkGrid(std::vector<std::vector<char>>& grid){
@@ -55,6 +53,12 @@ int checkGrid(std::vector<std::vector<char>>& grid){
                 }
                 if(-1 < j + 3){
                     sum += checkPosition(grid, i, j, 0, -1);
+                }
+                if(grid.size() > i + 3 && -1 < j - 3){
+                    sum += checkPosition(grid, i, j, 1, -1);
+                }
+                if(grid[0].size() > j + 3 && -1 < i - 3){
+                    sum += checkPosition(grid, i, j, -1, 1);
                 }
             }
         }
