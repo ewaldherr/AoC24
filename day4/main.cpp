@@ -66,6 +66,31 @@ int checkGrid(std::vector<std::vector<char>>& grid){
     return sum;
 }
 
+int checkPositionCross(std::vector<std::vector<char>>& grid, int i, int j){
+    if((grid[i-1][j-1]=='M' && grid[i+1][j-1]=='M' && grid[i-1][j+1]=='S' && grid[i+1][j+1]=='S')||
+       (grid[i-1][j+1]=='M' && grid[i-1][j-1]=='M' && grid[i+1][j-1]=='S' && grid[i+1][j+1]=='S')||
+       (grid[i+1][j+1]=='M' && grid[i-1][j+1]=='M' && grid[i-1][j-1]=='S' && grid[i+1][j-1]=='S')||
+       (grid[i+1][j+1]=='M' && grid[i+1][j-1]=='M' && grid[i-1][j-1]=='S' && grid[i-1][j+1]=='S')||
+    ){
+        return 1;
+    }
+    return 0;
+}
+
+int checkGridCross(std::vector<std::vector<char>>& grid){
+    int sum = 0;
+    for(int i=0; i < grid.size();++i){
+        for(int j = 0; j < grid[0].size(); ++j){
+            if(grid[i][j] == 'A'){
+                if(grid.size()> i+1 && grid[0].size() > j+1 && -1 < i-1 && -1 < j-1){
+                    sum += checkPositionCross(grid,i,j);
+                }
+            }
+        }
+    }
+    return sum;
+}
+
 int main(int argc, char** argv){
     std::vector<std::vector<char>> grid;
     readGridToVector(argv[1], grid);
