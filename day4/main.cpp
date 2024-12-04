@@ -30,11 +30,6 @@ int checkPosition(std::vector<std::vector<char>>& grid, int i, int j, int i_incr
             return 1;
         }
         return 0;
-    } else{
-        if(grid[i+i_incr][j+j_incr] == 'A' && grid[i+2*i_incr][j+2*j_incr] == 'M' && grid[i+3*i_incr][j+3*j_incr] == 'X'){
-            return 1;
-        }
-        return 0;
     }
 }
 
@@ -42,7 +37,7 @@ int checkGrid(std::vector<std::vector<char>>& grid){
     int sum = 0;
     for(int i=0; i < grid.size();++i){
         for(int j = 0; j < grid[0].size(); ++j){
-            if(grid[i][j] == 'X' || grid[i][j] == 'S'){
+            if(grid[i][j] == 'X'){
                 if(grid.size() > i + 3 && grid[0].size() > j + 3){
                     sum += checkPosition(grid, i, j, 1, 1);
                 }
@@ -64,6 +59,7 @@ int checkGrid(std::vector<std::vector<char>>& grid){
             }
         }
     }
+    return sum;
 }
 
 int main(int argc, char** argv){
