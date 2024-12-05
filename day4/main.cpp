@@ -70,7 +70,7 @@ int checkPositionCross(std::vector<std::vector<char>>& grid, int i, int j){
     if((grid[i-1][j-1]=='M' && grid[i+1][j-1]=='M' && grid[i-1][j+1]=='S' && grid[i+1][j+1]=='S')||
        (grid[i-1][j+1]=='M' && grid[i-1][j-1]=='M' && grid[i+1][j-1]=='S' && grid[i+1][j+1]=='S')||
        (grid[i+1][j+1]=='M' && grid[i-1][j+1]=='M' && grid[i-1][j-1]=='S' && grid[i+1][j-1]=='S')||
-       (grid[i+1][j+1]=='M' && grid[i+1][j-1]=='M' && grid[i-1][j-1]=='S' && grid[i-1][j+1]=='S')||
+       (grid[i+1][j+1]=='M' && grid[i+1][j-1]=='M' && grid[i-1][j-1]=='S' && grid[i-1][j+1]=='S')
     ){
         return 1;
     }
