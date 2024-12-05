@@ -1,17 +1,23 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <fstream>
 #include <map>
 #include <vector>
 #include <algorithm>
 
 void readSections(std::string filename, std::vector<std::vector<int>>& gridSection, std::multimap<int,int>& multimapSection){
-    std::istringstream inputStream(input);
+    std::ifstream file(filename);
+
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open the file!" << std::endl;
+    }
+
     std::string line;
     bool isSecondSection = false;
 
     // Process input line by line
-    while (std::getline(inputStream, line)) {
+    while (std::getline(file, line)) {
         // Trim leading/trailing spaces
         line.erase(line.begin(), std::find_if(line.begin(), line.end(), [](int ch) {
             return !std::isspace(ch);
@@ -45,6 +51,8 @@ void readSections(std::string filename, std::vector<std::vector<int>>& gridSecti
             gridSection.push_back(row);
         }
     }
+
+    file.close();
 }
 
 int checkLine(std::vector<int>& vec, std::multimap<int,int>& rules){
@@ -54,7 +62,9 @@ int checkLine(std::vector<int>& vec, std::multimap<int,int>& rules){
             auto start = range.first;
             auto end = range.second;
             for(start;start!=end;++start){
-                if(*start == vec[j]){
+                auto [k,v] = *start;
+                if(v == vec[j]){
+                    std::cout << v << " needs to be in front of " << vec[i] << std::endl;
                     return 0;
                 }
             }
@@ -72,7 +82,7 @@ int checkGrid(std::vector<std::vector<int>>& grid, std::multimap<int,int>& rules
 }
 
 int main(int argc, char** argv){
-    std::vector<std::vector<char>> grid;
+    std::vector<std::vector<int>> grid;
     std::multimap<int,int> rules;
     readSections(argv[1], grid, rules);
     std::cout << "The result is " << checkGrid(grid, rules) << std::endl;
