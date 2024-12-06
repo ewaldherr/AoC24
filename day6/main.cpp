@@ -180,6 +180,7 @@ int findLoops(std::vector<std::vector<char>>& grid){
                 grid[i][j]= '#';
                 sum += checkPath(grid);
                 grid = initialGrid;
+                std::cout << sum << std::endl;
             }
         }
     }
