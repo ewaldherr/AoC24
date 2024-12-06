@@ -68,7 +68,7 @@ void checkPath(std::vector<std::vector<char>>& grid){
         if(inBounds){
             while(grid[posI + 1][posJ] != '#'){
                 grid[posI][posJ] = 'X';
-                posI--;
+                posI++;
                 if(posI == grid.size()-1){
                     inBounds = false;
                     break;
