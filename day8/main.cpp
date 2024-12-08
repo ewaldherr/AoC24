@@ -45,7 +45,8 @@ int countAntinodes(std::vector<std::vector<char>>& antinodes){
     return sum;
 }
 
-void setAntinodes(std::vector<std::vector<char>>& grid, std::vector<std::vector<char>>& antinodes, int i, int a){
+int setAntinodes(std::vector<std::vector<char>>& grid, std::vector<std::vector<char>>& antinodes, int i, int a){
+    int sum = 0;
     int initialI = i;
     int initialJ = a;
     if(a + 1 < grid[0].size()){
@@ -60,32 +61,47 @@ void setAntinodes(std::vector<std::vector<char>>& grid, std::vector<std::vector<
                 if(i>initialI||j>initialJ){
                     int iDiff = i - initialI;
                     int jDiff = j - initialJ;
-                    if(i + iDiff < grid.size()&& j + jDiff < grid[0].size() && i + iDiff > -1 && j + jDiff > -1){
-                        antinodes[i+iDiff][j+jDiff] = '#';
-                    }
-                    if(initialI - iDiff < grid.size()&& initialJ - jDiff < grid[0].size()&& initialI + iDiff > -1 && initialJ + jDiff > -1){
-                        antinodes[initialI-iDiff][initialJ-jDiff] = '#';
+                    bool changes = true;
+                    int iters = 0;
+                    while(changes){
+                        changes = false;
+                        if(i + iters*iDiff < grid.size()&& j + iters*jDiff < grid[0].size() && i + iters*iDiff > -1 && j + iters*jDiff > -1){
+                            antinodes[i+iters*iDiff][j+iters*jDiff] = '#';
+                            sum++;
+                            changes = true;
+                        }
+                        if(initialI - iters*iDiff < grid.size()&& initialJ - iters*jDiff < grid[0].size()&& initialI + iters*iDiff > -1 && initialJ + iters*jDiff > -1){
+                            antinodes[initialI-iters*iDiff][initialJ-iters*jDiff] = '#';
+                            sum++;
+                            changes = true;
+                        }
+                        iters++;
                     }
                 }
             }
         }
     }
+    return sum;
 }
 
-void findAntinodes(std::vector<std::vector<char>>& grid, std::vector<std::vector<char>>& antinodes){
+int findAntinodes(std::vector<std::vector<char>>& grid, std::vector<std::vector<char>>& antinodes){
+    int sum = 0;
     for(int i = 0; i < grid.size(); ++i){
         for(int j = 0; j < grid[0].size(); ++j){
             if(grid[i][j]!= '.'){
-                setAntinodes(grid, antinodes, i, j);
+                sum += setAntinodes(grid, antinodes, i, j);
             }
         }
     }
+    return sum;
 }
 
 int main(int argc, char** argv){
     std::vector<std::vector<char>> grid;
     readGridToVector(argv[1], grid);
+    printGrid(grid);
     std::vector<std::vector<char>> antinodes = grid;
-    findAntinodes(grid, antinodes);
+    std::cout << findAntinodes(grid, antinodes) << std::endl;
+    printGrid(antinodes);
     std::cout << "The result is " << countAntinodes(antinodes) << std::endl;
 }
