@@ -9,7 +9,7 @@ int main()
     std::unordered_map<char, std::vector<std::vector<int>>> antenna_pos_by_freq;
     std::set<char> keys;
     int p1 = 0;
-    std::ifstream in("input.txt");
+    std::ifstream in("inputs/day8.txt");
     std::string line;
     std::vector<std::string> arr;
     int row=0;
